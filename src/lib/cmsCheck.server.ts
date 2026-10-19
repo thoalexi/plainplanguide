@@ -1,6 +1,8 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
 import sources from "../../data/sources.json";
-import { WATCHED, newestLink, compareRelease, sha256Hex, type Watched } from "./cmsImport";
+import { WATCHED, newestLink, compareRelease, sha256Hex, hasConfirmedPartB, type Watched } from "./cmsImport";
+import bundledFigures from "./medicare-figures.json";
+import type { FiguresPayload } from "./plans";
 
 export type CheckResult = { key: string; ok: boolean; updateAvailable: boolean; compared: boolean; note: string };
 const UA = { "user-agent": "Mozilla/5.0 PlainPlanGuide update check" };
@@ -22,12 +24,13 @@ async function checksumOf(url: string): Promise<string | null> {
   return buf.length > MAX_BYTES ? null : sha256Hex(buf);
 }
 
-async function checkOne(w: Watched, coverageYear: number, full: boolean, prev: { found_checksum: string | null; update_available: boolean } | null, liveUrl: string | null) {
+async function checkOne(w: Watched, coverageYear: number, full: boolean, prev: { found_checksum: string | null; update_available: boolean } | null, liveUrl: string | null, servingFigures: FiguresPayload) {
   if (w.kind === "announcement") {
     const res = await fetch(w.page, { headers: UA, redirect: "follow" });
     if (res.status === 404) return { found: null, file: null, url: null, checksum: null, update: false, compared: false, note: `CMS has not posted ${coverageYear} Part B amounts yet. Estimates keep the 2026 amounts, labeled.` };
     if (!res.ok) throw new Error(`CMS page returned ${res.status}`);
-    return { found: "announced", file: null, url: w.page, checksum: null, update: true, compared: false, note: `CMS posted the ${coverageYear} Part B amounts. Enter and confirm them under Yearly Medicare figures.` };
+    const confirmed = hasConfirmedPartB(servingFigures, coverageYear);
+    return { found: "announced", file: null, url: w.page, checksum: null, update: !confirmed, compared: false, note: confirmed ? `The website uses confirmed ${coverageYear} Part B premium and deductible amounts. Announcement availability checked only; amounts not compared.` : `CMS posted the ${coverageYear} Part B amounts. Enter and confirm them under Yearly Medicare figures.` };
   }
   if (w.kind === "metastore") {
     const res = await fetch(w.api, { headers: UA });
@@ -57,15 +60,16 @@ async function checkOne(w: Watched, coverageYear: number, full: boolean, prev: {
 export async function runCmsCheck(db: SupabaseClient, coverageYear: number, full = false): Promise<CheckResult[]> {
   const [{ data: prevRows }, { data: live }] = await Promise.all([
     db.from("dataset_checks").select("dataset_key,found_checksum,update_available"),
-    db.from("dataset_versions").select("dataset_key,source_url").eq("status", "live"),
+    db.from("dataset_versions").select("dataset_key,source_url,payload").eq("status", "live"),
   ]);
+  const servingFigures = ((live ?? []).find((r) => r.dataset_key === "figures")?.payload ?? bundledFigures) as FiguresPayload;
   const out: CheckResult[] = [];
   for (const w of WATCHED) {
     const prev = (prevRows ?? []).find((r: any) => r.dataset_key === w.key) ?? null;
     const liveUrl = (live ?? []).find((r: any) => r.dataset_key === w.key)?.source_url ?? null;
     const now = new Date().toISOString();
     try {
-      const r = await checkOne(w, coverageYear, full, prev, liveUrl);
+      const r = await checkOne(w, coverageYear, full, prev, liveUrl, servingFigures);
       await db.from("dataset_checks").upsert({ dataset_key: w.key, last_checked_at: now, last_success_at: now, last_error: null, found_url: r.url, found_release: r.found, found_file: r.file, found_checksum: r.checksum, update_available: r.update, contents_compared: r.compared, note: r.note });
       out.push({ key: w.key, ok: true, updateAvailable: r.update, compared: r.compared, note: r.note });
     } catch (e) {

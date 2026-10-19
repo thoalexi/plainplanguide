@@ -1,11 +1,52 @@
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, vi } from "vitest";
 import { readFileSync } from "node:fs";
-import { deriveStatus, compareRelease, STATUS_TEXT, WATCHED } from "./cmsImport";
+import { deriveStatus, compareRelease, STATUS_TEXT, WATCHED, hasConfirmedPartB, reconcilePartBCheck } from "./cmsImport";
+import { runCmsCheck } from "./cmsCheck.server";
 import { formularyYear } from "./formularyYear";
 import { FIGURES, applyLiveData, partBFallbackLabel, PLANS, estimateAnnual, type FiguresPayload } from "./plans";
 import figures from "./medicare-figures.json";
 
 const ok = { last_checked_at: "2026-10-15", last_success_at: "2026-10-15", last_error: null, update_available: false, contents_compared: false };
+
+describe("Part B published figures freshness", () => {
+  const confirmed = structuredClone(figures) as FiguresPayload;
+  confirmed.figures.partBMonthly = { ...confirmed.figures.partBMonthly, year: 2027, confirmed: true };
+  confirmed.figures.partBDeductible = { ...confirmed.figures.partBDeductible, year: 2027, confirmed: true };
+  it("requires both 2027 amounts, not a partial or wrong-year confirmation", () => {
+    expect(hasConfirmedPartB(confirmed, 2027)).toBe(true);
+    expect(hasConfirmedPartB(confirmed, 2026)).toBe(false);
+    const partial = structuredClone(confirmed);
+    partial.figures.partBDeductible.confirmed = false;
+    expect(hasConfirmedPartB(partial, 2027)).toBe(false);
+  });
+  it("clears the announcement notice after publishing and restores it with fallback figures", () => {
+    const check = { ...ok, dataset_key: "partb", found_release: "announced", update_available: true };
+    const published = reconcilePartBCheck(check, confirmed);
+    expect(published.update_available).toBe(false);
+    expect(deriveStatus(published)).toBe("no-newer-metadata");
+    expect(reconcilePartBCheck(published, figures).update_available).toBe(true);
+    expect(reconcilePartBCheck({ ...check, dataset_key: "stars" }, confirmed).update_available).toBe(true);
+  });
+  it("a new check uses live figures instead of bundled 2026 values", async () => {
+    const rows: Record<string, unknown>[] = [];
+    const db = { from: (table: string) => ({
+      select: () => table === "dataset_versions" ? { eq: async () => ({ data: [{ dataset_key: "figures", source_url: null, payload: confirmed }] }) } : Promise.resolve({ data: [] }),
+      upsert: async (row: Record<string, unknown>) => { rows.push(row); return { error: null }; },
+    }) };
+    vi.stubGlobal("fetch", vi.fn(async (url: string) => new Response("", { status: url.includes("2027-medicare-parts-b") ? 200 : 500 })));
+    try {
+      await runCmsCheck(db as unknown as Parameters<typeof runCmsCheck>[0], 2027);
+      expect(rows.find((r) => r["dataset_key"] === "partb")).toMatchObject({ update_available: false, contents_compared: false, found_release: "announced" });
+      rows.length = 0;
+      const fallbackDb = { from: (table: string) => ({
+        select: () => table === "dataset_versions" ? { eq: async () => ({ data: [] }) } : Promise.resolve({ data: [] }),
+        upsert: async (row: Record<string, unknown>) => { rows.push(row); return { error: null }; },
+      }) };
+      await runCmsCheck(fallbackDb as unknown as Parameters<typeof runCmsCheck>[0], 2027);
+      expect(rows.find((r) => r["dataset_key"] === "partb")?.["update_available"]).toBe(true);
+    } finally { vi.unstubAllGlobals(); }
+  });
+});
 
 describe("freshness status", () => {
   it("failed check is never green", () => {

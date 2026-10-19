@@ -4,7 +4,7 @@ import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 import type { Database } from "@/integrations/supabase/types";
 import stars2027 from "./cms2027-stars.json";
 import figures from "./medicare-figures.json";
-import { parseStarsCsv, validateStars, validateFigures, sha256Hex } from "./cmsImport";
+import { parseStarsCsv, validateStars, validateFigures, sha256Hex, reconcilePartBCheck } from "./cmsImport";
 import type { FiguresPayload, LiveData, StarsPayload } from "./plans";
 
 /** Public: only live, owner-published payloads. Falls back to built-in data on any error. */
@@ -41,11 +41,13 @@ async function assertOwner(ctx: { supabase: any; userId: string }) {
 export const getUpdateStatus = owner.handler(async ({ context }) => {
   const { data: isOwner } = await context.supabase.rpc("has_role", { _user_id: context.userId, _role: "owner" });
   if (!isOwner) return { isOwner: false as const };
-  const [checks, versions] = await Promise.all([
+  const [checks, versions, liveFigures] = await Promise.all([
     context.supabase.from("dataset_checks").select("*"),
     context.supabase.from("dataset_versions").select("id,dataset_key,coverage_year,status,source_url,source_published,sha256,report,imported_at,published_at").order("imported_at", { ascending: false }).limit(50),
+    currentLive(context, "figures"),
   ]);
-  return { isOwner: true as const, checks: checks.data ?? [], versions: versions.data ?? [], builtInFigures: figures as FiguresPayload };
+  const servingFigures = (liveFigures ?? figures) as FiguresPayload;
+  return { isOwner: true as const, checks: (checks.data ?? []).map((c) => reconcilePartBCheck(c, servingFigures)), versions: versions.data ?? [], builtInFigures: figures as FiguresPayload, servingFigures };
 });
 
 export const checkForUpdates = owner.inputValidator((d: { full?: boolean } | undefined) => ({ full: d?.full === true })).handler(async ({ data, context }) => {

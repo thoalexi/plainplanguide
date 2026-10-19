@@ -291,7 +291,7 @@ export function explainOrder(a: Pick<Answers, "doctorsFlex" | "travels" | "extra
   ].filter(Boolean) as string[];
   const out = [];
   if (prefs.length) out.push(`We show plans that best match what matters to you (${prefs.join(", ")}). For example, if you selected dental or hearing coverage, plans offering those benefits appear higher. If we can't confirm whether a plan includes a benefit, we won't assume it does. You can always check with the insurance company.`);
-  out.push(`${prefs.length ? "After that, " : ""}plans are sorted by ${SORT_LABEL[key]}, lowest first.`);
+  out.push(`${prefs.length ? "After that, plans" : "Plans"} are sorted by ${SORT_LABEL[key]}, lowest first.`);
   if (key === "total") out.push("If two plans cost within about $250 of each other, the one with the lower high-cost year goes first.");
   out.push("Original Medicare alone (no yearly spending limit) comes after plans with a limit. Special Needs Plans, which have eligibility rules, are listed last.");
   return out;

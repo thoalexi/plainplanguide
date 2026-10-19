@@ -81,6 +81,18 @@ export function validateStars(next: StarsPayload, current: StarsPayload, expecte
 }
 
 const FIG_KEYS: FigureKey[] = ["partDOopCap", "partDStandardDeductible", "partBMonthly", "partBDeductible"];
+/** Both Part B amounts must be confirmed for the year serving the site. */
+export function hasConfirmedPartB(figures: FiguresPayload, year: number): boolean {
+  return [figures.figures.partBMonthly, figures.figures.partBDeductible]
+    .every((f) => f.confirmed && f.year === year);
+}
+
+/** Reconcile the announcement notice after publish/restore without implying a new CMS check. */
+export function reconcilePartBCheck<T extends { dataset_key: string; found_release: string | null; update_available: boolean }>(check: T, figures: FiguresPayload): T {
+  if (check.dataset_key !== "partb" || check.found_release !== "announced") return check;
+  return { ...check, update_available: !hasConfirmedPartB(figures, figures.coverageYear) };
+}
+
 export function validateFigures(next: FiguresPayload, current: FiguresPayload): Report {
   const errors: string[] = []; const warnings: string[] = []; const changes: string[] = [];
   for (const k of FIG_KEYS) {

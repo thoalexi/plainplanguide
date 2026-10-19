@@ -7,7 +7,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { checkForUpdates, getUpdateStatus, publishVersion, restorePrevious, stageFigures, stageStars } from "@/lib/cmsUpdates.functions";
 import type { FigureKey, FiguresPayload } from "@/lib/plans";
 import sources from "../../../data/sources.json";
-import { WATCHED, STATUS_TEXT, deriveStatus } from "@/lib/cmsImport";
+import { WATCHED, STATUS_TEXT, deriveStatus, hasConfirmedPartB } from "@/lib/cmsImport";
 
 export const Route = createFileRoute("/_authenticated/admin/cms-updates")({
   head: () => ({
@@ -57,7 +57,7 @@ function CmsUpdates() {
   const d = q.data;
   if (q.isLoading) return <Shell><p>Loading…</p></Shell>;
   if (!d?.isOwner) return <Shell><p>This screen is only for the site owner.</p><button className={`${btn} mt-4 border border-border`} onClick={() => supabase.auth.signOut().then(() => location.assign("/"))}>Sign out</button></Shell>;
-  const figs = fig ?? d.builtInFigures;
+  const figs = fig ?? d.servingFigures;
   const liveOf = (k: string) => d.versions.find((v) => v.dataset_key === k && v.status === "live");
   const checkOf = (k: string) => d.checks.find((c) => c.dataset_key === k);
 
@@ -91,9 +91,9 @@ function CmsUpdates() {
                 <p>Last successful check: {when(c?.last_success_at)}</p>
                 {c?.last_error && <p className="text-destructive">Last check failed {when(c.last_checked_at)}: {c.last_error}</p>}
                 <p>Newest release found at CMS: {c?.found_release ? <>{c.found_file ?? c.found_release}{c.found_url && <> — <a className="text-primary underline" href={c.found_url} target="_blank" rel="noreferrer">CMS link</a></>}</> : "—"}</p>
-                <p>Serving the website: {w.key === "partb" ? (d.builtInFigures.figures.partBMonthly.confirmed ? "2027 amounts" : "2026 amounts (2027 not confirmed)") : live ? `published version from ${when(live.published_at)}` : used.map((s) => `built-in ${s.file} (CMS release ${s.released ?? "not stated"})`).join("; ")}</p>
+                <p>Serving the website: {w.key === "partb" ? (hasConfirmedPartB(d.servingFigures, d.servingFigures.coverageYear) ? "2027 amounts" : `Premium: ${d.servingFigures.figures.partBMonthly.year}; deductible: ${d.servingFigures.figures.partBDeductible.year} (2027 amounts not both confirmed)`) : live ? `published version from ${when(live.published_at)}` : used.map((s) => `built-in ${s.file} (CMS release ${s.released ?? "not stated"})`).join("; ")}</p>
                 {c && !c.contents_compared && c.last_success_at && <p className="text-muted-foreground">File contents not compared.</p>}
-                {c?.note && <p className="text-muted-foreground">{c.note}</p>}
+                {c?.note && <p className="text-muted-foreground">{w.key === "partb" && c.found_release === "announced" && hasConfirmedPartB(d.servingFigures, d.servingFigures.coverageYear) ? "The website uses confirmed 2027 Part B amounts. Announcement availability checked only; amounts not compared." : c.note}</p>}
               </div>
             );
           })}

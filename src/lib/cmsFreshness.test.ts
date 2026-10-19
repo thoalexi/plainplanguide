@@ -36,14 +36,14 @@ describe("Part B published figures freshness", () => {
     vi.stubGlobal("fetch", vi.fn(async (url: string) => new Response("", { status: url.includes("2027-medicare-parts-b") ? 200 : 500 })));
     try {
       await runCmsCheck(db as unknown as Parameters<typeof runCmsCheck>[0], 2027);
-      expect(rows.find((r) => r.dataset_key === "partb")).toMatchObject({ update_available: false, contents_compared: false, found_release: "announced" });
+      expect(rows.find((r) => r["dataset_key"] === "partb")).toMatchObject({ update_available: false, contents_compared: false, found_release: "announced" });
       rows.length = 0;
       const fallbackDb = { from: (table: string) => ({
         select: () => table === "dataset_versions" ? { eq: async () => ({ data: [] }) } : Promise.resolve({ data: [] }),
         upsert: async (row: Record<string, unknown>) => { rows.push(row); return { error: null }; },
       }) };
       await runCmsCheck(fallbackDb as unknown as Parameters<typeof runCmsCheck>[0], 2027);
-      expect(rows.find((r) => r.dataset_key === "partb")?.update_available).toBe(true);
+      expect(rows.find((r) => r["dataset_key"] === "partb")?.["update_available"]).toBe(true);
     } finally { vi.unstubAllGlobals(); }
   });
 });

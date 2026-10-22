@@ -7,7 +7,7 @@ const WITH_PREFS = { doctorsFlex: "network-ok" as const, travels: false, extras:
 describe("ranking explanation bullets", () => {
   it("says plainly how plans are sorted when nothing was selected", () => {
     const out = explainOrder(NO_PREFS, "total");
-    expect(out).toContain("plans are sorted by estimated yearly cost, lowest first.");
+    expect(out).toContain("Plans are sorted by estimated yearly cost, lowest first.");
     expect(out.some((l) => l.startsWith("After that"))).toBe(false);
   });
   it("links the sorting rule to the selected benefits when something was selected", () => {

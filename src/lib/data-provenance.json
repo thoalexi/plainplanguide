@@ -1,16 +1,17 @@
 {
- "asOf": "2026-09-30",
+ "asOf": "2026-10-18",
  "asOfSource": "CMS 2027 Landscape file",
  "datasets": [
   {
    "key": "landscape",
    "label": "Plan list, premiums, out-of-pocket limits, drug deductibles, counties",
-   "file": "CY2027_Landscape_202609.csv (CY2027 Landscape 202609.1 ZIP)",
+   "file": "CY2027_Landscape_202610.csv (CY2027 Landscape 202610 ZIP)",
    "url": "https://www.cms.gov/medicare/coverage/prescription-drug-coverage",
-   "released": "2026-09-30",
-   "importedAt": "2026-10-07",
+   "released": "2026-10-18",
+   "importedAt": "2026-10-22",
    "output": "src/lib/cms2027-mi.json",
-   "script": "scripts/build-mi-landscape.py"
+   "script": "scripts/build-mi-landscape.py",
+   "cmsLink": "/files/zip/cy2027-landscape-202610.zip"
   },
   {
    "key": "pbp",
@@ -20,7 +21,8 @@
    "released": "2026-10-01",
    "importedAt": "2026-10-08",
    "output": "src/lib/cms2027-mi-extras.json",
-   "script": "scripts/build-mi-extras.py, scripts/build-mi-copays.py"
+   "script": "scripts/build-mi-extras.py, scripts/build-mi-copays.py",
+   "cmsLink": "benefits-data/pbp-benefits-2027"
   },
   {
    "key": "services",
@@ -40,7 +42,8 @@
    "released": "2026-10-08",
    "importedAt": "2026-10-11",
    "output": "src/lib/cms2027-stars.json",
-   "script": "scripts/build-stars-2027.py"
+   "script": "scripts/build-stars-2027.py",
+   "cmsLink": "/files/zip/2027-star-ratings-data-tables-oct-8-2026.zip"
   },
   {
    "key": "hospitals",

@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-10-10",
+ "ranAt": "2026-10-22",
  "results": [
   {
    "id": 1,
@@ -30,7 +30,7 @@
      "total": 2571,
      "medical": 136,
      "drugs": 0,
-     "worstCase": 8934.8
+     "worstCase": 9234.8
     },
     {
      "id": "H5521_404_0",
@@ -40,7 +40,7 @@
      "total": 2555,
      "medical": 120,
      "drugs": 0,
-     "worstCase": 9434.8
+     "worstCase": 9734.8
     },
     {
      "id": "H2354_029_0",
@@ -50,7 +50,7 @@
      "total": 2556,
      "medical": 121,
      "drugs": 0,
-     "worstCase": 9484.8
+     "worstCase": 9784.8
     }
    ]
   },
@@ -83,7 +83,7 @@
      "total": 2931,
      "medical": 136,
      "drugs": 360,
-     "worstCase": 8934.8
+     "worstCase": 9234.8
     },
     {
      "id": "H5521_404_0",
@@ -93,7 +93,7 @@
      "total": 2915,
      "medical": 120,
      "drugs": 360,
-     "worstCase": 9434.8
+     "worstCase": 9734.8
     },
     {
      "id": "H2354_029_0",
@@ -103,7 +103,7 @@
      "total": 2796,
      "medical": 121,
      "drugs": 240,
-     "worstCase": 9484.8
+     "worstCase": 9784.8
     }
    ]
   },
@@ -136,7 +136,7 @@
      "total": 3630,
      "medical": 745,
      "drugs": 450,
-     "worstCase": 14384.8
+     "worstCase": 14684.8
     },
     {
      "id": "H5521_407_0",
@@ -146,7 +146,7 @@
      "total": 4106,
      "medical": 921,
      "drugs": 750,
-     "worstCase": 9734.8
+     "worstCase": 10034.8
     },
     {
      "id": "H5521_219_0",
@@ -156,7 +156,7 @@
      "total": 4187,
      "medical": 928,
      "drugs": 825,
-     "worstCase": 9734.8
+     "worstCase": 10034.8
     }
    ]
   },
@@ -189,17 +189,17 @@
      "total": 4980,
      "medical": 745,
      "drugs": 1800,
-     "worstCase": 14384.8
+     "worstCase": 14684.8
     },
     {
      "id": "H5521_404_0",
      "name": "Aetna Medicare Signature Extra (PPO)",
      "type": "Advantage PPO",
      "monthlyPremium": 0,
-     "total": 5425,
+     "total": 5500,
      "medical": 890,
-     "drugs": 2100,
-     "worstCase": 9434.8
+     "drugs": 2175,
+     "worstCase": 9734.8
     },
     {
      "id": "H2354_029_0",
@@ -209,7 +209,7 @@
      "total": 5366,
      "medical": 981,
      "drugs": 1950,
-     "worstCase": 9484.8
+     "worstCase": 9784.8
     }
    ]
   },
@@ -242,7 +242,7 @@
      "total": 3390,
      "medical": 745,
      "drugs": 210,
-     "worstCase": 14384.8
+     "worstCase": 14684.8
     },
     {
      "id": "H5521_404_0",
@@ -252,7 +252,7 @@
      "total": 3910,
      "medical": 890,
      "drugs": 585,
-     "worstCase": 9434.8
+     "worstCase": 9734.8
     },
     {
      "id": "H5521_214_0",
@@ -262,7 +262,7 @@
      "total": 3829,
      "medical": 884,
      "drugs": 510,
-     "worstCase": 9734.8
+     "worstCase": 10034.8
     }
    ]
   },
@@ -295,7 +295,7 @@
      "total": 4695,
      "medical": 2170,
      "drugs": 90,
-     "worstCase": 14384.8
+     "worstCase": 14684.8
     },
     {
      "id": "medigap-g",
@@ -305,7 +305,7 @@
      "total": 5442,
      "medical": 283,
      "drugs": 108,
-     "worstCase": 7433.799999999999
+     "worstCase": 7733.799999999999
     },
     {
      "id": "medigap-n",
@@ -315,7 +315,7 @@
      "total": 5507,
      "medical": 900,
      "drugs": 108,
-     "worstCase": 7498.799999999999
+     "worstCase": 7798.799999999999
     }
    ]
   },
@@ -345,30 +345,30 @@
      "name": "Humana Value Plus H5216-382 (PPO)",
      "type": "Advantage PPO",
      "monthlyPremium": 0,
-     "total": 6705,
+     "total": 7005,
      "medical": 2170,
-     "drugs": 2100,
-     "worstCase": 14384.8
+     "drugs": 2400,
+     "worstCase": 14684.8
     },
     {
      "id": "medigap-g",
      "name": "Medigap Plan G + Part D",
      "type": "Original + Medigap",
      "monthlyPremium": 168,
-     "total": 7434,
+     "total": 7734,
      "medical": 283,
-     "drugs": 2100,
-     "worstCase": 7433.799999999999
+     "drugs": 2400,
+     "worstCase": 7733.799999999999
     },
     {
      "id": "medigap-n",
      "name": "Medigap Plan N + Part D",
      "type": "Original + Medigap",
      "monthlyPremium": 122,
-     "total": 7499,
+     "total": 7799,
      "medical": 900,
-     "drugs": 2100,
-     "worstCase": 7498.799999999999
+     "drugs": 2400,
+     "worstCase": 7798.799999999999
     }
    ]
   },
@@ -394,26 +394,6 @@
    "county": "Kalamazoo",
    "top": [
     {
-     "id": "medigap-n",
-     "name": "Medigap Plan N + Part D",
-     "type": "Original + Medigap",
-     "monthlyPremium": 122,
-     "total": 5373,
-     "medical": 515,
-     "drugs": 360,
-     "worstCase": 7498.799999999999
-    },
-    {
-     "id": "medigap-g",
-     "name": "Medigap Plan G + Part D",
-     "type": "Original + Medigap",
-     "monthlyPremium": 168,
-     "total": 5694,
-     "medical": 283,
-     "drugs": 360,
-     "worstCase": 7433.799999999999
-    },
-    {
      "id": "H5216_382_0",
      "name": "Humana Value Plus H5216-382 (PPO)",
      "type": "Advantage PPO",
@@ -421,7 +401,27 @@
      "total": 3480,
      "medical": 745,
      "drugs": 300,
-     "worstCase": 14384.8
+     "worstCase": 14684.8
+    },
+    {
+     "id": "H5521_407_0",
+     "name": "Aetna Medicare Signature Extra (PPO)",
+     "type": "Advantage PPO",
+     "monthlyPremium": 0,
+     "total": 3956,
+     "medical": 921,
+     "drugs": 600,
+     "worstCase": 10034.8
+    },
+    {
+     "id": "H5521_219_0",
+     "name": "Aetna Medicare Signature (PPO)",
+     "type": "Advantage PPO",
+     "monthlyPremium": 0,
+     "total": 4037,
+     "medical": 928,
+     "drugs": 675,
+     "worstCase": 10034.8
     }
    ]
   },
@@ -454,7 +454,7 @@
      "total": 3270,
      "medical": 745,
      "drugs": 90,
-     "worstCase": 14384.8
+     "worstCase": 14684.8
     },
     {
      "id": "H5521_285_0",
@@ -464,7 +464,7 @@
      "total": 3974,
      "medical": 1179,
      "drugs": 360,
-     "worstCase": 9734.8
+     "worstCase": 10034.8
     },
     {
      "id": "H5216_384_0",
@@ -474,7 +474,7 @@
      "total": 4112,
      "medical": 1318,
      "drugs": 360,
-     "worstCase": 9734.8
+     "worstCase": 10034.8
     }
    ]
   },
@@ -507,27 +507,27 @@
      "total": 3480,
      "medical": 745,
      "drugs": 300,
-     "worstCase": 14384.8
+     "worstCase": 14684.8
     },
     {
-     "id": "H5521_285_0",
-     "name": "Aetna Medicare Signature (PPO)",
-     "type": "Advantage PPO",
+     "id": "H2320_034_3",
+     "name": "PriorityMedicare Latitude (HMO-POS)",
+     "type": "Advantage HMO",
      "monthlyPremium": 0,
-     "total": 4214,
-     "medical": 1179,
-     "drugs": 600,
-     "worstCase": 9734.8
+     "total": 3877,
+     "medical": 918,
+     "drugs": 525,
+     "worstCase": 14684.8
     },
     {
-     "id": "H5216_384_0",
-     "name": "Humana Full Access (PPO)",
-     "type": "Advantage PPO",
+     "id": "H5883_017_0",
+     "name": "BCN Advantage Elements (HMO-POS)",
+     "type": "Advantage HMO",
      "monthlyPremium": 0,
-     "total": 4502,
-     "medical": 1318,
-     "drugs": 750,
-     "worstCase": 9734.8
+     "total": 4342,
+     "medical": 948,
+     "drugs": 360,
+     "worstCase": 9934.8
     }
    ]
   }

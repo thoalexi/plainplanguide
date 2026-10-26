@@ -33,10 +33,11 @@ async function checkOne(w: Watched, coverageYear: number, full: boolean, prev: {
     return { found: "announced", file: null, url: w.page, checksum: null, update: !confirmed, compared: false, note: confirmed ? `The website uses confirmed ${coverageYear} Part B premium and deductible amounts. Announcement availability checked only; amounts not compared.` : `CMS posted the ${coverageYear} Part B amounts. Enter and confirm them under Yearly Medicare figures.` };
   }
   if (w.kind === "metastore") {
-    const res = await fetch(w.api, { headers: UA });
+    // CMS's data catalog rejects the custom site User-Agent with HTTP 403.
+    const res = await fetch(w.api);
     if (!res.ok) throw new Error(`CMS data catalog returned ${res.status}`);
-    const meta = (await res.json()) as { modified?: string; distribution?: { downloadURL?: string }[] };
-    const found = meta.modified?.slice(0, 10) ?? null;
+    const meta = (await res.json()) as { released?: string; modified?: string; distribution?: { downloadURL?: string }[] };
+    const found = (meta.released ?? meta.modified)?.slice(0, 10) ?? null;
     if (!found) throw new Error("CMS data catalog gave no release date");
     const url = meta.distribution?.[0]?.downloadURL ?? null;
     const base = baselineFor(w.key, liveUrl);

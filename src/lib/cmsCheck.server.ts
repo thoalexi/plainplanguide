@@ -6,6 +6,7 @@ import type { FiguresPayload } from "./plans";
 
 export type CheckResult = { key: string; ok: boolean; updateAvailable: boolean; compared: boolean; note: string };
 const UA = { "user-agent": "Mozilla/5.0 PlainPlanGuide update check" };
+const CATALOG_HEADERS = { "user-agent": "curl/8.14.1" };
 const MAX_BYTES = 60_000_000;
 
 /** File link of the version serving the site: published version if live, else the built-in file. */
@@ -15,8 +16,8 @@ function baselineFor(key: string, liveUrl: string | null): string | null {
   return key === "hospitals" ? (s?.released ?? null) : (s?.cmsLink ?? null);
 }
 
-async function checksumOf(url: string): Promise<string | null> {
-  const res = await fetch(url, { headers: UA });
+async function checksumOf(url: string, headers: HeadersInit = UA): Promise<string | null> {
+  const res = await fetch(url, { headers });
   if (!res.ok || !res.body) throw new Error(`file download returned ${res.status}`);
   const len = Number(res.headers.get("content-length") ?? 0);
   if (len > MAX_BYTES) { await res.body.cancel(); return null; }
@@ -33,14 +34,15 @@ async function checkOne(w: Watched, coverageYear: number, full: boolean, prev: {
     return { found: "announced", file: null, url: w.page, checksum: null, update: !confirmed, compared: false, note: confirmed ? `The website uses confirmed ${coverageYear} Part B premium and deductible amounts. Announcement availability checked only; amounts not compared.` : `CMS posted the ${coverageYear} Part B amounts. Enter and confirm them under Yearly Medicare figures.` };
   }
   if (w.kind === "metastore") {
-    const res = await fetch(w.api, { headers: UA });
+    // CMS rejects custom, browser, and absent User-Agents; this CLI header is accepted.
+    const res = await fetch(w.api, { headers: CATALOG_HEADERS });
     if (!res.ok) throw new Error(`CMS data catalog returned ${res.status}`);
-    const meta = (await res.json()) as { modified?: string; distribution?: { downloadURL?: string }[] };
-    const found = meta.modified?.slice(0, 10) ?? null;
+    const meta = (await res.json()) as { released?: string; modified?: string; distribution?: { downloadURL?: string }[] };
+    const found = (meta.released ?? meta.modified)?.slice(0, 10) ?? null;
     if (!found) throw new Error("CMS data catalog gave no release date");
     const url = meta.distribution?.[0]?.downloadURL ?? null;
     const base = baselineFor(w.key, liveUrl);
-    const checksum = url && (full || found !== base) ? await checksumOf(url) : null;
+    const checksum = url && (full || found !== base) ? await checksumOf(url, CATALOG_HEADERS) : null;
     const r = compareRelease(found, base, { checksum: prev?.found_checksum ?? null }, checksum);
     return { found, file: url?.split("/").pop() ?? null, url, checksum: checksum ?? prev?.found_checksum ?? null, ...r, note: r.update ? `CMS released ${found}; site uses ${base}.` : `CMS release ${found} matches the list in use.` };
   }

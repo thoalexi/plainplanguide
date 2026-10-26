@@ -49,8 +49,8 @@
       "label": "Michigan hospital list",
       "file": "CMS Hospital General Information (dataset xubh-q36u)",
       "url": "https://data.cms.gov/provider-data/dataset/xubh-q36u",
-      "released": "2026-07-22",
-      "importedAt": "2026-10-08",
+      "released": "2026-08-13",
+      "importedAt": "2026-10-26",
       "output": "src/lib/mi-hospitals.json",
       "script": "scripts/build-mi-hospitals.py"
     },

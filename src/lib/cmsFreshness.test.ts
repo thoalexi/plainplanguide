@@ -48,6 +48,29 @@ describe("Part B published figures freshness", () => {
   });
 });
 
+describe("hospital catalog freshness", () => {
+  it("uses CMS's release date and avoids the header CMS blocks", async () => {
+    const rows: Record<string, unknown>[] = [];
+    const db = { from: (table: string) => ({
+      select: () => table === "dataset_versions" ? { eq: async () => ({ data: [] }) } : Promise.resolve({ data: [] }),
+      upsert: async (row: Record<string, unknown>) => { rows.push(row); return { error: null }; },
+    }) };
+    const fetchMock = vi.fn(async (url: string, init?: RequestInit) => {
+      if (!url.includes("metastore")) return new Response("", { status: 500 });
+      if (new Headers(init?.headers).get("user-agent") !== "curl/8.14.1") return new Response("", { status: 403 });
+      return Response.json({ released: "2026-08-13", modified: "2026-07-22", distribution: [{ downloadURL: "https://data.cms.gov/Hospital_General_Information.csv" }] });
+    });
+    vi.stubGlobal("fetch", fetchMock);
+    try {
+      const results = await runCmsCheck(db as unknown as Parameters<typeof runCmsCheck>[0], 2027);
+      expect(results.find((r) => r.key === "hospitals")).toMatchObject({ ok: true, updateAvailable: false, compared: false });
+      expect(rows.find((r) => r["dataset_key"] === "hospitals")).toMatchObject({ found_release: "2026-08-13", last_error: null, update_available: false });
+      expect(fetchMock.mock.calls.filter(([url]) => url.includes("metastore"))).toHaveLength(1);
+      expect(fetchMock.mock.calls.some(([url]) => url.endsWith(".csv"))).toBe(false);
+    } finally { vi.unstubAllGlobals(); }
+  });
+});
+
 describe("freshness status", () => {
   it("failed check is never green", () => {
     expect(deriveStatus({ ...ok, last_error: "CMS page returned 500" })).toBe("failed");

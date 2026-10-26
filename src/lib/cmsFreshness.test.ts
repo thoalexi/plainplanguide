@@ -57,7 +57,7 @@ describe("hospital catalog freshness", () => {
     }) };
     const fetchMock = vi.fn(async (url: string, init?: RequestInit) => {
       if (!url.includes("metastore")) return new Response("", { status: 500 });
-      if (new Headers(init?.headers).has("user-agent")) return new Response("", { status: 403 });
+      if (new Headers(init?.headers).get("user-agent") !== "curl/8.14.1") return new Response("", { status: 403 });
       return Response.json({ released: "2026-08-13", modified: "2026-07-22", distribution: [{ downloadURL: "https://data.cms.gov/Hospital_General_Information.csv" }] });
     });
     vi.stubGlobal("fetch", fetchMock);

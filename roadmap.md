@@ -1,6 +1,6 @@
 # Roadmap
 
-- [ ] Import the supplied official CMS hospital CSV, validate Michigan rows, and repair the failed hospital freshness check.
+- [x] Import the supplied official CMS hospital CSV, validate Michigan rows, and repair the failed hospital freshness check (149 unchanged hospitals; owner check succeeds; 26 tests pass).
 
 - [x] Shorten Compare notices, keep explanations in help popovers, and refresh the P favicon.
 

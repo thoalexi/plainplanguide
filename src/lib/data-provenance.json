@@ -1,17 +1,17 @@
 {
- "asOf": "2026-10-18",
+ "asOf": "2026-11-01",
  "asOfSource": "CMS 2027 Landscape file",
  "datasets": [
   {
    "key": "landscape",
    "label": "Plan list, premiums, out-of-pocket limits, drug deductibles, counties",
-   "file": "CY2027_Landscape_202610.csv (CY2027 Landscape 202610 ZIP)",
+   "file": "CY2027_Landscape_202611.csv (CY2027 Landscape 202611 ZIP)",
    "url": "https://www.cms.gov/medicare/coverage/prescription-drug-coverage",
-   "released": "2026-10-18",
-   "importedAt": "2026-10-22",
+   "released": "2026-11-01",
+   "importedAt": "2026-11-04",
    "output": "src/lib/cms2027-mi.json",
    "script": "scripts/build-mi-landscape.py",
-   "cmsLink": "/files/zip/cy2027-landscape-202610.zip"
+   "cmsLink": "/files/zip/cy2027-landscape-202611.zip"
   },
   {
    "key": "pbp",
@@ -50,8 +50,8 @@
    "label": "Michigan hospital list",
    "file": "CMS Hospital General Information (dataset xubh-q36u)",
    "url": "https://data.cms.gov/provider-data/dataset/xubh-q36u",
-    "released": "2026-08-13",
-    "importedAt": "2026-10-26",
+   "released": "2026-08-13",
+   "importedAt": "2026-10-26",
    "output": "src/lib/mi-hospitals.json",
    "script": "scripts/build-mi-hospitals.py"
   },

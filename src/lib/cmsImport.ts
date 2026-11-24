@@ -118,7 +118,7 @@ export const WATCHED: Watched[] = [
   { key: "pbp", kind: "link", covers: ["pbp", "services"], page: "https://www.cms.gov/data-research/statistics-trends-and-reports/medicare-advantagepart-d-contract-and-enrollment-data/benefits-data", pattern: /benefits-data\/(?:pbp-benefits-\d{4}(?:-q\d)?|\d{4}-pbp-benefits(?:-q\d)?)(?=")/gi },
   { key: "stars", kind: "link", covers: ["stars"], page: "https://www.cms.gov/medicare/health-drug-plans/part-c-d-performance-data", pattern: /\/files\/zip\/(\d{4})-star-ratings-data-tables[\w-]*\.zip/gi },
   { key: "hospitals", kind: "metastore", covers: ["hospitals"], api: "https://data.cms.gov/provider-data/api/1/metastore/schemas/dataset/items/xubh-q36u" },
-  { key: "partb", kind: "announcement", covers: ["figures"], page: "https://www.cms.gov/newsroom/fact-sheets/2027-medicare-parts-b-premiums-and-deductibles" },
+  { key: "partb", kind: "announcement", covers: ["figures"], page: "https://www.cms.gov/newsroom/fact-sheets/2027-medicare-parts-b-premiums-deductibles" },
 ];
 
 export type CheckRow = { last_checked_at: string | null; last_success_at: string | null; last_error: string | null; update_available: boolean; contents_compared: boolean } | null | undefined;

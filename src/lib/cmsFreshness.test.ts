@@ -12,6 +12,9 @@ describe("Part B published figures freshness", () => {
   const confirmed = structuredClone(figures) as FiguresPayload;
   confirmed.figures.partBMonthly = { ...confirmed.figures.partBMonthly, year: 2027, confirmed: true };
   confirmed.figures.partBDeductible = { ...confirmed.figures.partBDeductible, year: 2027, confirmed: true };
+  const fallback = structuredClone(figures) as FiguresPayload;
+  fallback.figures.partBMonthly = { ...fallback.figures.partBMonthly, year: 2026, confirmed: false };
+  fallback.figures.partBDeductible = { ...fallback.figures.partBDeductible, year: 2026, confirmed: false };
   it("requires both 2027 amounts, not a partial or wrong-year confirmation", () => {
     expect(hasConfirmedPartB(confirmed, 2027)).toBe(true);
     expect(hasConfirmedPartB(confirmed, 2026)).toBe(false);
@@ -24,10 +27,10 @@ describe("Part B published figures freshness", () => {
     const published = reconcilePartBCheck(check, confirmed);
     expect(published.update_available).toBe(false);
     expect(deriveStatus(published)).toBe("no-newer-metadata");
-    expect(reconcilePartBCheck(published, figures).update_available).toBe(true);
+    expect(reconcilePartBCheck(published, fallback).update_available).toBe(true);
     expect(reconcilePartBCheck({ ...check, dataset_key: "stars" }, confirmed).update_available).toBe(true);
   });
-  it("a new check uses live figures instead of bundled 2026 values", async () => {
+  it("a new check uses the live figures, falling back to the bundled confirmed 2027 values", async () => {
     const rows: Record<string, unknown>[] = [];
     const db = { from: (table: string) => ({
       select: () => table === "dataset_versions" ? { eq: async () => ({ data: [{ dataset_key: "figures", source_url: null, payload: confirmed }] }) } : Promise.resolve({ data: [] }),
@@ -43,7 +46,7 @@ describe("Part B published figures freshness", () => {
         upsert: async (row: Record<string, unknown>) => { rows.push(row); return { error: null }; },
       }) };
       await runCmsCheck(fallbackDb as unknown as Parameters<typeof runCmsCheck>[0], 2027);
-      expect(rows.find((r) => r["dataset_key"] === "partb")?.["update_available"]).toBe(true);
+      expect(rows.find((r) => r["dataset_key"] === "partb")?.["update_available"]).toBe(false);
     } finally { vi.unstubAllGlobals(); }
   });
 });
@@ -117,16 +120,17 @@ describe("publish requires exact-version validation", () => {
   });
 });
 
-describe("Part B 2026 fallback", () => {
-  it("labels estimates while unconfirmed, and math + label switch together", () => {
+describe("Part B 2027 confirmed", () => {
+  it("uses CMS's 2027 amounts with no fallback label", () => {
     const plan = PLANS.find((p) => p.real)!;
-    expect(FIGURES.partBMonthly.year).toBe(2026);
-    expect(partBFallbackLabel()).toMatch(/2026 Part B/);
+    expect(FIGURES.partBMonthly).toMatchObject({ value: 209.4, year: 2027, confirmed: true });
+    expect(FIGURES.partBDeductible).toMatchObject({ value: 292, year: 2027, confirmed: true });
+    expect(partBFallbackLabel()).toBeNull();
     const before = estimateAnnual(plan, "some", 0).total;
     const next = JSON.parse(JSON.stringify(figures)) as FiguresPayload;
     next.figures.partBMonthly = { ...next.figures.partBMonthly, value: 300, year: 2027, confirmed: true };
     applyLiveData({ figures: next, publishedAt: {} });
     expect(partBFallbackLabel()).toBeNull();
-    expect(estimateAnnual(plan, "some", 0).total).toBeCloseTo(before + (300 - 202.9) * 12, 0);
+    expect(estimateAnnual(plan, "some", 0).total).toBeCloseTo(before + (300 - 209.4) * 12, 0);
   });
 });

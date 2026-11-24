@@ -2,9 +2,33 @@
   "_note": "Shared yearly Medicare figures. Every value carries its year and whether CMS has confirmed it for the coverage year. Never enter projections as confirmed.",
   "coverageYear": 2027,
   "figures": {
-    "partDOopCap": { "value": 2400, "year": 2027, "confirmed": true, "source": "https://www.cms.gov/files/document/2027-announcement.pdf", "label": "Part D yearly out-of-pocket cap (covered drugs)" },
-    "partDStandardDeductible": { "value": 700, "year": 2027, "confirmed": true, "source": "https://www.cms.gov/files/document/2027-announcement.pdf", "label": "Highest Part D deductible a plan may charge" },
-    "partBMonthly": { "value": 202.9, "year": 2026, "confirmed": false, "source": "https://www.cms.gov/newsroom/fact-sheets/2026-medicare-parts-b-premiums-and-deductibles", "label": "Standard Part B monthly premium" },
-    "partBDeductible": { "value": 283, "year": 2026, "confirmed": false, "source": "https://www.cms.gov/newsroom/fact-sheets/2026-medicare-parts-b-premiums-and-deductibles", "label": "Part B yearly deductible" }
+    "partDOopCap": {
+      "value": 2400,
+      "year": 2027,
+      "confirmed": true,
+      "source": "https://www.cms.gov/files/document/2027-announcement.pdf",
+      "label": "Part D yearly out-of-pocket cap (covered drugs)"
+    },
+    "partDStandardDeductible": {
+      "value": 700,
+      "year": 2027,
+      "confirmed": true,
+      "source": "https://www.cms.gov/files/document/2027-announcement.pdf",
+      "label": "Highest Part D deductible a plan may charge"
+    },
+    "partBMonthly": {
+      "value": 209.4,
+      "year": 2027,
+      "confirmed": true,
+      "source": "https://www.cms.gov/newsroom/fact-sheets/2027-medicare-parts-b-premiums-deductibles",
+      "label": "Standard Part B monthly premium"
+    },
+    "partBDeductible": {
+      "value": 292,
+      "year": 2027,
+      "confirmed": true,
+      "source": "https://www.cms.gov/newsroom/fact-sheets/2027-medicare-parts-b-premiums-deductibles",
+      "label": "Part B yearly deductible"
+    }
   }
 }

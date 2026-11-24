@@ -44,11 +44,11 @@ describe("figures", () => {
   it("2027 Part D cap and deductible are confirmed CMS values", () => {
     expect(PART_D_OOP_CAP).toBe(2400);
     expect(FIGURES.partDStandardDeductible.value).toBe(700);
-    expect(FIGURES.partBMonthly.confirmed).toBe(false);
+    expect(FIGURES.partBMonthly).toMatchObject({ value: 209.4, year: 2027, confirmed: true });
   });
   it("rejects non-CMS sources and mismatched confirmed years", () => {
     const bad = JSON.parse(JSON.stringify(figures)) as FiguresPayload;
-    bad.figures.partBMonthly.source = "https://example.com"; bad.figures.partBMonthly.confirmed = true;
+    bad.figures.partBMonthly.source = "https://example.com"; bad.figures.partBMonthly.confirmed = true; bad.figures.partBMonthly.year = 2026;
     const r = validateFigures(bad, figures as FiguresPayload);
     expect(r.ok).toBe(false); expect(r.errors.length).toBe(2);
   });

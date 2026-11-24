@@ -69,7 +69,7 @@
     "partDDeductibleMax": 700,
     "partDOopThreshold": 2400,
     "partDSource": "CMS Announcement of CY 2027 MA Capitation Rates and Part C and Part D Payment Policies, Table V-2 (April 6, 2026), https://www.cms.gov/files/document/2027-announcement.pdf",
-    "moopInNetworkMax": null,
-    "moopSource": "The official CMS CY 2027 MOOP limit document has not been read directly yet."
+    "moopInNetworkMax": 9850,
+    "moopSource": "CMS Final CY 2027 Part C Bid Review Memorandum (April 22, 2026), MOOP limits table: highest in-network limit $9,850 (PPO combined $14,800). https://mabenefitsmailbox.lmi.org/MABenefitsMailbox/S3Browser/GetFile?path=Final+CY+2027+Part+C+Bid+Review+Memorandum_4-22-2026+Final.pdf"
   }
 }

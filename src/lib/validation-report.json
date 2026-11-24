@@ -33,8 +33,8 @@
   },
   {
    "name": "Out-of-pocket limits within CMS 2027 maximum",
-   "status": "unconfirmed",
-   "detail": "Limit not confirmed. The official CMS CY 2027 MOOP limit document has not been read directly yet. Highest limit in our data: $9,850.",
+   "status": "pass",
+   "detail": "CMS Final CY 2027 Part C Bid Review Memorandum (April 22, 2026), MOOP limits table: highest in-network limit $9,850 (PPO combined $14,800). https://mabenefitsmailbox.lmi.org/MABenefitsMailbox/S3Browser/GetFile?path=Final+CY+2027+Part+C+Bid+Review+Memorandum_4-22-2026+Final.pdf",
    "items": [],
    "count": 0
   },

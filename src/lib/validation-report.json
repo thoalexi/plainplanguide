@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-04",
+ "ranAt": "2026-11-25",
  "source": "CY2027_Landscape_202611.csv",
  "status": "pass",
  "checks": [
@@ -48,7 +48,7 @@
   {
    "name": "Plans changed since previous import",
    "status": "pass",
-   "detail": "Compared with snapshot 2026-10-22.",
+   "detail": "Compared with snapshot 2026-11-04.",
    "items": [],
    "count": 0
   }

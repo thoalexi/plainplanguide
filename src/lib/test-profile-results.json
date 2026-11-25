@@ -1,5 +1,5 @@
 {
- "ranAt": "2026-11-04",
+ "ranAt": "2026-11-25",
  "results": [
   {
    "id": 1,
@@ -27,30 +27,30 @@
      "name": "Humana Gold Plus H8908-004 (HMO-POS)",
      "type": "Advantage HMO",
      "monthlyPremium": 0,
-     "total": 2571,
+     "total": 2649,
      "medical": 136,
      "drugs": 0,
-     "worstCase": 9234.8
+     "worstCase": 9312.8
     },
     {
      "id": "H5521_404_0",
      "name": "Aetna Medicare Signature Extra (PPO)",
      "type": "Advantage PPO",
      "monthlyPremium": 0,
-     "total": 2555,
+     "total": 2633,
      "medical": 120,
      "drugs": 0,
-     "worstCase": 9734.8
+     "worstCase": 9812.8
     },
     {
      "id": "H2354_029_0",
      "name": "Henry Ford Select (HMO)",
      "type": "Advantage HMO",
      "monthlyPremium": 0,
-     "total": 2556,
+     "total": 2634,
      "medical": 121,
      "drugs": 0,
-     "worstCase": 9784.8
+     "worstCase": 9862.8
     }
    ]
   },
@@ -80,30 +80,30 @@
      "name": "Humana Gold Plus H8908-004 (HMO-POS)",
      "type": "Advantage HMO",
      "monthlyPremium": 0,
-     "total": 2931,
+     "total": 3009,
      "medical": 136,
      "drugs": 360,
-     "worstCase": 9234.8
+     "worstCase": 9312.8
     },
     {
      "id": "H5521_404_0",
      "name": "Aetna Medicare Signature Extra (PPO)",
      "type": "Advantage PPO",
      "monthlyPremium": 0,
-     "total": 2915,
+     "total": 2993,
      "medical": 120,
      "drugs": 360,
-     "worstCase": 9734.8
+     "worstCase": 9812.8
     },
     {
      "id": "H2354_029_0",
      "name": "Henry Ford Select (HMO)",
      "type": "Advantage HMO",
      "monthlyPremium": 0,
-     "total": 2796,
+     "total": 2874,
      "medical": 121,
      "drugs": 240,
-     "worstCase": 9784.8
+     "worstCase": 9862.8
     }
    ]
   },
@@ -133,30 +133,30 @@
      "name": "Humana Value Plus H5216-382 (PPO)",
      "type": "Advantage PPO",
      "monthlyPremium": 0,
-     "total": 3630,
+     "total": 3708,
      "medical": 745,
      "drugs": 450,
-     "worstCase": 14684.8
+     "worstCase": 14762.8
     },
     {
      "id": "H5521_407_0",
      "name": "Aetna Medicare Signature Extra (PPO)",
      "type": "Advantage PPO",
      "monthlyPremium": 0,
-     "total": 4106,
+     "total": 4184,
      "medical": 921,
      "drugs": 750,
-     "worstCase": 10034.8
+     "worstCase": 10112.8
     },
     {
      "id": "H5521_219_0",
      "name": "Aetna Medicare Signature (PPO)",
      "type": "Advantage PPO",
      "monthlyPremium": 0,
-     "total": 4187,
+     "total": 4265,
      "medical": 928,
      "drugs": 825,
-     "worstCase": 10034.8
+     "worstCase": 10112.8
     }
    ]
   },
@@ -186,30 +186,30 @@
      "name": "Humana Value Plus H5216-382 (PPO)",
      "type": "Advantage PPO",
      "monthlyPremium": 0,
-     "total": 4980,
+     "total": 5058,
      "medical": 745,
      "drugs": 1800,
-     "worstCase": 14684.8
+     "worstCase": 14762.8
     },
     {
      "id": "H5521_404_0",
      "name": "Aetna Medicare Signature Extra (PPO)",
      "type": "Advantage PPO",
      "monthlyPremium": 0,
-     "total": 5500,
+     "total": 5578,
      "medical": 890,
      "drugs": 2175,
-     "worstCase": 9734.8
+     "worstCase": 9812.8
     },
     {
      "id": "H2354_029_0",
      "name": "Henry Ford Select (HMO)",
      "type": "Advantage HMO",
      "monthlyPremium": 0,
-     "total": 5366,
+     "total": 5444,
      "medical": 981,
      "drugs": 1950,
-     "worstCase": 9784.8
+     "worstCase": 9862.8
     }
    ]
   },
@@ -239,30 +239,30 @@
      "name": "Humana Value Plus H5216-382 (PPO)",
      "type": "Advantage PPO",
      "monthlyPremium": 0,
-     "total": 3390,
+     "total": 3468,
      "medical": 745,
      "drugs": 210,
-     "worstCase": 14684.8
+     "worstCase": 14762.8
     },
     {
      "id": "H5521_404_0",
      "name": "Aetna Medicare Signature Extra (PPO)",
      "type": "Advantage PPO",
      "monthlyPremium": 0,
-     "total": 3910,
+     "total": 3988,
      "medical": 890,
      "drugs": 585,
-     "worstCase": 9734.8
+     "worstCase": 9812.8
     },
     {
      "id": "H5521_214_0",
      "name": "Aetna Medicare Signature (PPO)",
      "type": "Advantage PPO",
      "monthlyPremium": 0,
-     "total": 3829,
+     "total": 3907,
      "medical": 884,
      "drugs": 510,
-     "worstCase": 10034.8
+     "worstCase": 10112.8
     }
    ]
   },
@@ -292,30 +292,30 @@
      "name": "Humana Value Plus H5216-382 (PPO)",
      "type": "Advantage PPO",
      "monthlyPremium": 0,
-     "total": 4695,
+     "total": 4773,
      "medical": 2170,
      "drugs": 90,
-     "worstCase": 14684.8
+     "worstCase": 14762.8
     },
     {
      "id": "medigap-g",
      "name": "Medigap Plan G + Part D",
      "type": "Original + Medigap",
      "monthlyPremium": 168,
-     "total": 5442,
-     "medical": 283,
+     "total": 5529,
+     "medical": 292,
      "drugs": 108,
-     "worstCase": 7733.799999999999
+     "worstCase": 7820.799999999999
     },
     {
      "id": "medigap-n",
      "name": "Medigap Plan N + Part D",
      "type": "Original + Medigap",
      "monthlyPremium": 122,
-     "total": 5507,
+     "total": 5585,
      "medical": 900,
      "drugs": 108,
-     "worstCase": 7798.799999999999
+     "worstCase": 7876.799999999999
     }
    ]
   },
@@ -345,30 +345,30 @@
      "name": "Humana Value Plus H5216-382 (PPO)",
      "type": "Advantage PPO",
      "monthlyPremium": 0,
-     "total": 7005,
+     "total": 7083,
      "medical": 2170,
      "drugs": 2400,
-     "worstCase": 14684.8
+     "worstCase": 14762.8
     },
     {
      "id": "medigap-g",
      "name": "Medigap Plan G + Part D",
      "type": "Original + Medigap",
      "monthlyPremium": 168,
-     "total": 7734,
-     "medical": 283,
+     "total": 7821,
+     "medical": 292,
      "drugs": 2400,
-     "worstCase": 7733.799999999999
+     "worstCase": 7820.799999999999
     },
     {
      "id": "medigap-n",
      "name": "Medigap Plan N + Part D",
      "type": "Original + Medigap",
      "monthlyPremium": 122,
-     "total": 7799,
+     "total": 7877,
      "medical": 900,
      "drugs": 2400,
-     "worstCase": 7798.799999999999
+     "worstCase": 7876.799999999999
     }
    ]
   },
@@ -398,30 +398,30 @@
      "name": "Humana Value Plus H5216-382 (PPO)",
      "type": "Advantage PPO",
      "monthlyPremium": 0,
-     "total": 3480,
+     "total": 3558,
      "medical": 745,
      "drugs": 300,
-     "worstCase": 14684.8
+     "worstCase": 14762.8
     },
     {
      "id": "H5521_407_0",
      "name": "Aetna Medicare Signature Extra (PPO)",
      "type": "Advantage PPO",
      "monthlyPremium": 0,
-     "total": 3956,
+     "total": 4034,
      "medical": 921,
      "drugs": 600,
-     "worstCase": 10034.8
+     "worstCase": 10112.8
     },
     {
      "id": "H5521_219_0",
      "name": "Aetna Medicare Signature (PPO)",
      "type": "Advantage PPO",
      "monthlyPremium": 0,
-     "total": 4037,
+     "total": 4115,
      "medical": 928,
      "drugs": 675,
-     "worstCase": 10034.8
+     "worstCase": 10112.8
     }
    ]
   },
@@ -451,30 +451,30 @@
      "name": "Humana Value Plus H5216-382 (PPO)",
      "type": "Advantage PPO",
      "monthlyPremium": 0,
-     "total": 3270,
+     "total": 3348,
      "medical": 745,
      "drugs": 90,
-     "worstCase": 14684.8
+     "worstCase": 14762.8
     },
     {
      "id": "H5521_285_0",
      "name": "Aetna Medicare Signature (PPO)",
      "type": "Advantage PPO",
      "monthlyPremium": 0,
-     "total": 3974,
+     "total": 4052,
      "medical": 1179,
      "drugs": 360,
-     "worstCase": 10034.8
+     "worstCase": 10112.8
     },
     {
      "id": "H5216_384_0",
      "name": "Humana Full Access (PPO)",
      "type": "Advantage PPO",
      "monthlyPremium": 0,
-     "total": 4112,
+     "total": 4190,
      "medical": 1318,
      "drugs": 360,
-     "worstCase": 10034.8
+     "worstCase": 10112.8
     }
    ]
   },
@@ -504,30 +504,30 @@
      "name": "Humana Value Plus H5216-382 (PPO)",
      "type": "Advantage PPO",
      "monthlyPremium": 0,
-     "total": 3480,
+     "total": 3558,
      "medical": 745,
      "drugs": 300,
-     "worstCase": 14684.8
+     "worstCase": 14762.8
     },
     {
      "id": "H2320_034_3",
      "name": "PriorityMedicare Latitude (HMO-POS)",
      "type": "Advantage HMO",
      "monthlyPremium": 0,
-     "total": 3877,
+     "total": 3955,
      "medical": 918,
      "drugs": 525,
-     "worstCase": 14684.8
+     "worstCase": 14762.8
     },
     {
      "id": "H5883_017_0",
      "name": "BCN Advantage Elements (HMO-POS)",
      "type": "Advantage HMO",
      "monthlyPremium": 0,
-     "total": 4342,
+     "total": 4420,
      "medical": 948,
      "drugs": 360,
-     "worstCase": 9934.8
+     "worstCase": 10012.8
     }
    ]
   }
